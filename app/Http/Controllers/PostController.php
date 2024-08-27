@@ -9,6 +9,9 @@ class PostController extends Controller
 {
     public function index(Post $post)
     {
-        return $post->get();
+         // Modelで制限掛けた投稿を$posts変数に取得してビューに渡す
+         //pa
+        return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
     }
 }
+?>
