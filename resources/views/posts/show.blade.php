@@ -9,19 +9,21 @@
         <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Hibibibibi's Blog</h1>
-        <div class='posts'>
-            @foreach ($posts as $post)
-                <div class='post'>
-                    <h2 class='title'>
-                        <a href="/posts/{{ $post->id }}"> {{ $post->title }} </a>
-                    </h2>
-                    <p class='body'>{{ $post->body }}</p>
-                </div>
-            @endforeach
+        <h1 class='title'>
+            {{ $post->title }}
+        </h1>
+        <div class='content'>
+            <div class='content_post'>
+                <h3>本文</h3>
+                <p>{{ $post->body }}</p>
+            </div>
+            <div class='content_days'>
+                <h3>投稿日</h3>
+                <p>{{ $post->updated_at }}</p>
+            </div>
         </div>
-        <div class='paginate'>
-            {{ $posts->links() }}
+        <div class='footer'>
+            <a href='/'>戻る</a>
         </div>
     </body>
 </html>
