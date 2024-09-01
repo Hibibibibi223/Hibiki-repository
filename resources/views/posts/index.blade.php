@@ -10,6 +10,7 @@
     </head>
     <body>
         <h1>Hibibibibi's Blog</h1>
+        <a href='/posts/create'>create post</a>
         <div class='posts'>
             @foreach ($posts as $post)
                 <div class='post'>
@@ -23,5 +24,6 @@
         <div class='paginate'>
             {{ $posts->links() }}
         </div>
+        <a href='/posts/create'>create post</a>
     </body>
 </html>
