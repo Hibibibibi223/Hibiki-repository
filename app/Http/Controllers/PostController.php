@@ -37,5 +37,21 @@ class PostController extends Controller
         // データ保存が成功した後、その投稿の詳細ページにリダイレクトします。$post->idには、保存後の投稿のIDが格納されており、これをURLに含めることでリダイレクト先を指定しています。
         return redirect('/posts/' . $post->id);
     }
+
+    public function edit(Post $post){   
+        return view('posts.edit')->with(['post' => $post]);
+    }   
+
+    public function update(PostRequest $request, Post $post){
+        $input_post = $request['post'];
+        $post->fill($input_post)->save();
+
+        return redirect('/posts/' . $post->id);
+    }
+
+    public function delete(Post $post){
+        $post->delete();
+        return redirect('/');
+    }
 }
 ?>
