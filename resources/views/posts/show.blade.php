@@ -21,6 +21,7 @@
                 <h3>投稿日</h3>
                 <p>{{ $post->updated_at }}</p>
             </div>
+            <a href="/categories/{{ $post->category->id }}">{{ $post->category->name }}</a>
         </div>
         <div class="edit"><a href="/posts/{{ $post->id }}/edit">edit</a></div>
         <div class='footer'>
