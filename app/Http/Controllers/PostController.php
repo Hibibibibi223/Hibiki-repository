@@ -6,14 +6,36 @@ use App\Http\Requests\PostRequest;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use GuzzleHttp\Client;
 
 class PostController extends Controller
 {
-    public function index(Post $post){
+/*     public function index(Post $post){
          // Modelで制限掛けた投稿を$posts変数に取得してビューに渡す
          //
         return view('posts.index')->with(['posts' => $post->getPaginateByLimit()]);
+    } */
+
+    public function index(Post $post){
+        $client = new \GuzzleHttp\Client();
+
+        $url = 'https://teratail.com/api/v1/questions';
+
+        $response = $client->request(
+            'GET',
+            $url,
+            ['Bearer' => config('services.teratail.token')]
+        );
+        $questions = json_decode($response->getBody(),true);
+
+        return view('posts.index')->with([
+            'posts' => $post->getPaginateByLimit(),
+            'questions' => $questions['questions'],
+        ]);
     }
+
+
+
     public function show(Post $post){
         // ルートパラメータから暗黙の結合で取得した $post を 'posts.show' ビューに渡す
         return view('posts.show')->with(['post' => $post]);

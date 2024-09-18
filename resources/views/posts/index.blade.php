@@ -8,8 +8,11 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
     </head>
+    <x-app-layout>
+    <x-slot name="header">
+    </x-slot>
     <body>
-        <h1>Hibibibibi's Blog</h1>
+        <h1>{{ Auth::user()->name }}'s Blog</h1>
         <a href='/posts/create'>create post</a>
         <div class='posts'>
             @foreach ($posts as $post)
@@ -41,4 +44,14 @@
             }
         </script>
     </body>
+    <div>
+        @foreach($questions as $question)
+            <div>
+                <a href="https://teratail.com/questions/{{ $question['id'] }}">
+                    {{ $question['title'] }}
+                </a>
+            </div>
+        @endforeach
+    </div>
+    </x-app-layout>
 </html>
